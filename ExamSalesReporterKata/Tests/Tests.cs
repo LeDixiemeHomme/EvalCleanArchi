@@ -13,7 +13,7 @@ public class Tests
         using var writer = new StringWriter();
         Console.SetOut(writer);
         Console.SetError(writer);
-        Program.Main(new string[]{"print"});
+        Program.Main(new string[]{"print", "../../../Data/data.csv"});
         var sut = writer.ToString();
         Check.That(sut).IsEqualTo(
             @$"=== Sales Viewer ===
@@ -36,7 +36,7 @@ public class Tests
         using var writer = new StringWriter();
         Console.SetOut(writer);
         Console.SetError(writer);
-        Program.Main(new string[]{"report"});
+        Program.Main(new string[]{"report", "../../../Data/data.csv"});
         var sut = writer.ToString();
         Check.That(sut).IsEqualTo(
             @$"=== Sales Viewer ===
@@ -53,12 +53,54 @@ public class Tests
     } 
     
     [Fact]
+    public void SampleData_on_print_data2_command()
+    {
+        using var writer = new StringWriter();
+        Console.SetOut(writer);
+        Console.SetError(writer);
+        Program.Main(new string[]{"print", "../../../Data/data2.csv"});
+        var sut = writer.ToString();
+        Check.That(sut).IsEqualTo(
+            @$"=== Sales Viewer ===
++----------------------------------------------------------------------------------------------+
+|          orderid |         userName |    numberOfItems |    totalOfBasket |        dateOfBuy |
++----------------------------------------------------------------------------------------------+
+|                1 |           trevor |                3 |           700.00 |       2002-11-30 |
+|                2 |             paul |                1 |           500.50 |       2021-12-11 |
++----------------------------------------------------------------------------------------------+
+"
+        );
+    } 
+    
+    [Fact]
+    public void SampleData_on_report_data2_command()
+    {
+        using var writer = new StringWriter();
+        Console.SetOut(writer);
+        Console.SetError(writer);
+        Program.Main(new string[]{"report", "../../../Data/data2.csv"});
+        var sut = writer.ToString();
+        Check.That(sut).IsEqualTo(
+            @$"=== Sales Viewer ===
++---------------------------------------------+
+|                Number of sales |          2 |
+|              Number of clients |          0 |
+|               Total items sold |          4 |
+|             Total sales amount |     1200.5 |
+|            Average amount/sale |     600.25 |
+|             Average item price |     300.12 |
++---------------------------------------------+
+"
+        );
+    } 
+    
+    [Fact]
     public void SampleData_on_empty_command()
     {
         using var writer = new StringWriter();
         Console.SetOut(writer);
         Console.SetError(writer);
-        Program.Main(new string[]{""});
+        Program.Main(new string[]{"", "../../../Data/data.csv"});
         var sut = writer.ToString();
         Check.That(sut).IsEqualTo(
             @$"=== Sales Viewer ===
