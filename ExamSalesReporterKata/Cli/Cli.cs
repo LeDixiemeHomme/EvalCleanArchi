@@ -9,7 +9,7 @@
     		Console.WriteLine("=== Sales Viewer ===");
     		//extract the command name from the args  
     		string command = args.Length > 0 ? args[0] : "unknown";  
-    		string file = args.Length >= 2 ? args[1] : "./Data/data.csv";
+    		string file = args.Length >= 2 ? args[1] : "../../../Data/data.csv";
     		//read content of our data file  
     		//[2012-10-30] rui : actually it only works with this file, maybe it's a good idea to pass file //name as parameter to this app later?  
     		string[] dataContentString = File.ReadAllLines(file);  
