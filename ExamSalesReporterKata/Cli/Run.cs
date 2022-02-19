@@ -30,8 +30,7 @@ public class Run
         {
 	        { "print", new PrintStrategy()},
 	        { "report", new ReportStrategy()},
-	        { "unknown", new DefaultStrategy()},
-	        { "", new DefaultStrategy()}
+	        { "unknown", new DefaultStrategy()}
         };
         
         DisplayStrategy displayStrategy = commandWithStrategy.GetValueOrDefault(command);

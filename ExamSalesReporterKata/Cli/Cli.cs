@@ -5,9 +5,7 @@
     	//lots of comments!
     	public static void Main(string[] args)
         {
-	        Run run = new Run();
-	        
-	        run.Exec(args: args);
+	        new Run().Exec(args: args);
         }
     }
 }
