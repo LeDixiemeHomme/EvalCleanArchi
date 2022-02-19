@@ -5,7 +5,7 @@ using Xunit;
 using exam_sales_reporter_kata.Cli;
 namespace exam_sales_reporter_kata.Tests;
 
-public class Tests
+public class GoldenMasterTests
 {
     [Fact]
     public void SampleData_on_print_command()
@@ -42,7 +42,7 @@ public class Tests
             @$"=== Sales Viewer ===
 +---------------------------------------------+
 |                Number of sales |          5 |
-|              Number of clients |          0 |
+|              Number of clients |          3 |
 |               Total items sold |         11 |
 |             Total sales amount |    1441.84 |
 |            Average amount/sale |     288.37 |
@@ -84,7 +84,7 @@ public class Tests
             @$"=== Sales Viewer ===
 +---------------------------------------------+
 |                Number of sales |          2 |
-|              Number of clients |          0 |
+|              Number of clients |          2 |
 |               Total items sold |          4 |
 |             Total sales amount |     1200.5 |
 |            Average amount/sale |     600.25 |

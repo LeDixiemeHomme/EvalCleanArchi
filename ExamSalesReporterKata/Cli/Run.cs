@@ -65,10 +65,12 @@ public class Run
     	 { //get the cell values for the line
     	 	var cells = line.Split(',');
     	 	number1++;//increment the total of sales
-    	 	//to count the number of clients, we put only distinct names in a hashset //then we'll count the number of entries if (!clients.Contains(cells[1])) clients.Add(cells[1]);  
+    	 	//to count the number of clients, we put only distinct names in a hashset //then we'll count the number of entries
+    	 	if (!clients.Contains(cells[1])) clients.Add(cells[1]);  
     	 	number2 += int.Parse(cells[2]);//we sum the total of items sold here
     	 	number3 += double.Parse(cells[3]);//we sum the amount of each sell
-    	 	//we compare the current cell date with the stored one and pick the higher last = DateTime.Parse(cells[4]) > last ? DateTime.Parse(cells[4]) : last;  
+    	 	//we compare the current cell date with the stored one and pick the higher
+    	 	last = DateTime.Parse(cells[4]) > last ? DateTime.Parse(cells[4]) : last;  
     	 }
     	 //we compute the average basket amount per sale
     	 number4 = Math.Round(number3 / number1,2);

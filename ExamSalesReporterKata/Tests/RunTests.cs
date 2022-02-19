@@ -57,7 +57,7 @@ public class RunTests
         Assert.Equal(run.ProcessReport(dataContentString: dataContentString), 
             @$"+---------------------------------------------+
 |                Number of sales |          5 |
-|              Number of clients |          0 |
+|              Number of clients |          3 |
 |               Total items sold |         11 |
 |             Total sales amount |    1441.84 |
 |            Average amount/sale |     288.37 |
