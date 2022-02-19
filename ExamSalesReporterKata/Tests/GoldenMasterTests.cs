@@ -13,7 +13,7 @@ public class GoldenMasterTests
         using var writer = new StringWriter();
         Console.SetOut(writer);
         Console.SetError(writer);
-        Program.Main(new string[]{"print", "../../../Data/data.csv"});
+        Program.Main(new string[]{"print"});
         var sut = writer.ToString();
         Check.That(sut).IsEqualTo(
             @$"=== Sales Viewer ===
@@ -36,7 +36,7 @@ public class GoldenMasterTests
         using var writer = new StringWriter();
         Console.SetOut(writer);
         Console.SetError(writer);
-        Program.Main(new string[]{"report", "../../../Data/data.csv"});
+        Program.Main(new string[]{"report"});
         var sut = writer.ToString();
         Check.That(sut).IsEqualTo(
             @$"=== Sales Viewer ===
@@ -101,6 +101,24 @@ public class GoldenMasterTests
         Console.SetOut(writer);
         Console.SetError(writer);
         Program.Main(new string[]{});
+        var sut = writer.ToString();
+        Check.That(sut).IsEqualTo(
+            @$"=== Sales Viewer ===
+[ERR] your command is not valid 
+Help: 
+    - [print]  : show the content of our commerce records in data.csv
+    - [report] : show a summary from data.csv records 
+"
+        );
+    } 
+
+    [Fact]
+    public void SampleData_on_wrong_command()
+    {
+        using var writer = new StringWriter();
+        Console.SetOut(writer);
+        Console.SetError(writer);
+        Program.Main(new string[]{"wrong"});
         var sut = writer.ToString();
         Check.That(sut).IsEqualTo(
             @$"=== Sales Viewer ===
