@@ -7,7 +7,7 @@
         {
 	        Run run = new Run();
 	        
-	        run.exec(args: args);
+	        run.Exec(args: args);
         }
     }
 }
