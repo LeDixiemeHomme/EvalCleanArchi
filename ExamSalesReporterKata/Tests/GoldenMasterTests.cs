@@ -53,7 +53,7 @@ public class GoldenMasterTests
     } 
     
     [Fact]
-    public void SampleData_on_print_data2_command()
+    public void SampleData2_on_print_command()
     {
         using var writer = new StringWriter();
         Console.SetOut(writer);
@@ -73,7 +73,7 @@ public class GoldenMasterTests
     } 
     
     [Fact]
-    public void SampleData_on_report_data2_command()
+    public void SampleData2_on_report_command()
     {
         using var writer = new StringWriter();
         Console.SetOut(writer);
@@ -101,6 +101,24 @@ public class GoldenMasterTests
         Console.SetOut(writer);
         Console.SetError(writer);
         Program.Main(new string[]{"", "../../../Data/data.csv"});
+        var sut = writer.ToString();
+        Check.That(sut).IsEqualTo(
+            @$"=== Sales Viewer ===
+[ERR] your command is not valid 
+Help: 
+    - [print]  : show the content of our commerce records in data.csv
+    - [report] : show a summary from data.csv records 
+"
+        );
+    } 
+    
+    [Fact]
+    public void SampleData_on_empty_command_empty_file()
+    {
+        using var writer = new StringWriter();
+        Console.SetOut(writer);
+        Console.SetError(writer);
+        Program.Main(new string[]{});
         var sut = writer.ToString();
         Check.That(sut).IsEqualTo(
             @$"=== Sales Viewer ===

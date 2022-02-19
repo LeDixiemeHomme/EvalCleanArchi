@@ -4,6 +4,8 @@
     &lt;TestId&gt;xUnit::54AC61A5-E9A7-4F61-98CD-C91C878485D9::net6.0::exam_sales_reporter_kata.Tests.Tests&lt;/TestId&gt;
     &lt;TestId&gt;xUnit::54AC61A5-E9A7-4F61-98CD-C91C878485D9::net6.0::exam_sales_reporter_kata.Tests.RunTests&lt;/TestId&gt;
     &lt;TestId&gt;xUnit::54AC61A5-E9A7-4F61-98CD-C91C878485D9::net6.0::exam_sales_reporter_kata.Tests.GoldenMasterTests&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::54AC61A5-E9A7-4F61-98CD-C91C878485D9::net6.0::exam_sales_reporter_kata.Tests.Model.Strategy.DisplayStrategyTests&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String>
+	
 	</wpf:ResourceDictionary>
