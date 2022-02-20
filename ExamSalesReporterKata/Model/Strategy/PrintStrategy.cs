@@ -4,10 +4,9 @@ namespace exam_sales_reporter_kata.Model.Strategy;
 
 public class PrintStrategy: DisplayStrategy
 {
+    
     public override string Display(string[] dataContentString)
     {
-        StringBuilder stringBuilderProcessPrint = new StringBuilder();
-		
         //get the header line  
         string line1 = dataContentString[0];
         //get other content lines
@@ -22,11 +21,9 @@ public class PrintStrategy: DisplayStrategy
     
         var headerString  = String.Join(" | ", columnInfos.Select(x=>x.name)
             .Select((val,ind) => val.PadLeft(16)));
-		
-        stringBuilderProcessPrint.AppendLine("+" + new String('-', headerString.Length + 2) + "+");
-        stringBuilderProcessPrint.AppendLine("| " + headerString + " |");
-        stringBuilderProcessPrint.AppendLine("+" + new String('-', headerString.Length + 2 ) + "+");
-		
+        
+        StringBuilder stringBuilderProcessPrint = StringBuilderWithHeaderString(headerString);
+
         //then add each line to the table  
         foreach (string line in otherLines)
         { 
@@ -36,7 +33,16 @@ public class PrintStrategy: DisplayStrategy
                 .Select((val,ind) => val.PadLeft(16)));
             stringBuilderProcessPrint.AppendLine($"| {tableLine} |");
         } 
-        stringBuilderProcessPrint.AppendLine("+" + new String('-', headerString.Length+2) + "+");
+        stringBuilderProcessPrint.AppendLine("+" + new String('-', headerString.Length + 2) + "+");
         return stringBuilderProcessPrint.ToString();
+    }
+
+    public StringBuilder StringBuilderWithHeaderString(string headerString)
+    {
+        StringBuilder stringBuilderHeader = new StringBuilder();
+        stringBuilderHeader.AppendLine("+" + new String('-', headerString.Length + 2) + "+");
+        stringBuilderHeader.AppendLine("| " + headerString + " |");
+        stringBuilderHeader.AppendLine("+" + new String('-', headerString.Length + 2) + "+");
+        return stringBuilderHeader;
     }
 }
