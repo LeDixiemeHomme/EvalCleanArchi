@@ -7,6 +7,8 @@ public class PrintStrategy: DisplayStrategy
     
     public override string Display(string[] dataContentString)
     {
+        StringBuilder stringBuilderProcessPrint = new StringBuilder();
+        
         //get the header line  
         string line1 = dataContentString[0];
         //get other content lines
@@ -22,27 +24,34 @@ public class PrintStrategy: DisplayStrategy
         var headerString  = String.Join(" | ", columnInfos.Select(x=>x.name)
             .Select((val,ind) => val.PadLeft(16)));
         
-        StringBuilder stringBuilderProcessPrint = StringBuilderWithHeaderString(headerString);
+        stringBuilderProcessPrint = AddHeaderStringBuilder(headerString, stringBuilderProcessPrint);
 
         //then add each line to the table  
-        foreach (string line in otherLines)
-        { 
-            //extract columns from our csv line and add all these cells to the line  
-            var cells = line.Split(',');
-            var tableLine  = String.Join(" | ", line.Split(',')
-                .Select((val,ind) => val.PadLeft(16)));
-            stringBuilderProcessPrint.AppendLine($"| {tableLine} |");
-        } 
+        stringBuilderProcessPrint = AddBodyToStringBuilder(otherLines, stringBuilderProcessPrint); 
         stringBuilderProcessPrint.AppendLine("+" + new String('-', headerString.Length + 2) + "+");
         return stringBuilderProcessPrint.ToString();
     }
 
-    public StringBuilder StringBuilderWithHeaderString(string headerString)
+    public StringBuilder AddHeaderStringBuilder(string headerString, StringBuilder stringBuilderProcessPrint)
     {
-        StringBuilder stringBuilderHeader = new StringBuilder();
+        StringBuilder stringBuilderHeader = stringBuilderProcessPrint;
         stringBuilderHeader.AppendLine("+" + new String('-', headerString.Length + 2) + "+");
         stringBuilderHeader.AppendLine("| " + headerString + " |");
         stringBuilderHeader.AppendLine("+" + new String('-', headerString.Length + 2) + "+");
         return stringBuilderHeader;
+    }
+
+    public StringBuilder AddBodyToStringBuilder(IEnumerable<string> otherLines, StringBuilder stringBuilderProcessPrint)
+    {
+        StringBuilder stringBuilderBody = stringBuilderProcessPrint;
+        foreach (string line in otherLines)
+        {
+            //extract columns from our csv line and add all these cells to the line  
+            var cells = line.Split(',');
+            var tableLine = String.Join(" | ", line.Split(',')
+                .Select((val, ind) => val.PadLeft(16)));
+            stringBuilderBody.AppendLine($"| {tableLine} |");
+        }
+        return stringBuilderBody;
     }
 }
