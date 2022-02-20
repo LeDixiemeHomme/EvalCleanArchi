@@ -11,8 +11,14 @@ public class Run
 		if (args.Length > 0)
 		{
 			string command = args[0];
-			return (Command) Enum.Parse(typeof(Command), command, true);
-			// return Enum.GetNames(typeof(Command)).Contains(command) ? Enum.Parse(typeof(Command), command) : Command.Unknown;
+			try
+			{
+				return (Command) Enum.Parse(typeof(Command), command, true);
+			}
+			catch (ArgumentException e)
+			{
+				return Command.Unknown;
+			}
 		}
 		return Command.Unknown;
 	}
