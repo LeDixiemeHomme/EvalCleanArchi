@@ -1,33 +1,33 @@
 using System.Text;
+using exam_sales_reporter_kata.Model;
 using exam_sales_reporter_kata.Model.Strategy;
 
 namespace exam_sales_reporter_kata.Cli;
 
-enum Commands
-{
-	print,
-	report,
-	unknown
-}
-
 public class Run
 {
-	public string GetCommandFromArgs(string[] args)
+	public Command GetCommandFromArgs(string[] args)
 	{
-		return args.Length > 0 ? args[0] : "unknown";
+		if (args.Length > 0)
+		{
+			string command = args[0];
+			return (Command) Enum.Parse(typeof(Command), command, true);
+			// return Enum.GetNames(typeof(Command)).Contains(command) ? Enum.Parse(typeof(Command), command) : Command.Unknown;
+		}
+		return Command.Unknown;
 	}
 	public string GetFileFromArgs(string[] args)
 	{
-		return args.Length >= 2 ? args[1] : "../../../Data/data.csv";
+		return args.Length > 1 ? args[1] : "../../../Data/data.csv";
 	}
 
-	public DisplayStrategy DisplayStrategyFromCommand(String command)
+	public DisplayStrategy DisplayStrategyFromCommand(Command command)
 	{
-		var commandWithStrategy = new Dictionary<string, DisplayStrategy>()
+		var commandWithStrategy = new Dictionary<Command, DisplayStrategy>()
 		{
-			{"print", new PrintStrategy()},
-			{"report", new ReportStrategy()},
-			{"unknown", new DefaultStrategy()}
+			{Command.Print, new PrintStrategy()},
+			{Command.Report, new ReportStrategy()},
+			{Command.Unknown, new DefaultStrategy()}
 		};
 		return commandWithStrategy.GetValueOrDefault(command, new DefaultStrategy());
 	}
@@ -37,7 +37,7 @@ public class Run
     	//add a title to our app
     	Console.WriteLine("=== Sales Viewer ===");
     	//extract the command name from the args
-    	string command = GetCommandFromArgs(args: args);
+    	Command command = GetCommandFromArgs(args: args);
     	string file = GetFileFromArgs(args: args);
     	//read content of our data file
     	//[2012-10-30] rui : actually it only works with this file, maybe it's a good idea to pass file
